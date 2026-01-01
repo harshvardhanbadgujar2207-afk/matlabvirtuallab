@@ -138,6 +138,8 @@ input {
             opacity: 0.9;
             margin-top: 2px;
         }
+        .top{
+      margin-left: 40vw;
 </style>
  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
@@ -167,7 +169,7 @@ input {
 
 
     </div>
-  <h1>System of Linear Equations Learning App</h1>
+  <h1>System of Linear Equations Learning Website</h1>
   <p>Select a section to explore</p>
 </header>
 
@@ -184,42 +186,25 @@ input {
 <section id="intro">
   <h2>Introduction To  Linear System of Equations (Matrix Method) </h2>
     
-      <p>
-        A linear system of equations is a set of two or more linear equations involving the same variables. Such systems
-        can be efficiently represented and solved using matrix methods, which provide a systematic and compact approach
-        to analyze large systems of equations.
-        In the matrix method, a system of linear equations is written in the form
+      <p>A system of linear equations arises in many areas of science, engineering, economics, and mathematics. Solving such systems efficiently is essential for understanding and modeling real-world problems. One powerful and systematic approach to solving linear systems is the matrix method, particularly the rank method, which provides clear criteria for the existence and uniqueness of solutions.
+In the matrix method, a system of linear equations is written in the form
+
+       
         <div class="top">
         <h4>
                 AX=B      
         </h4>
         </div>
 
+
       </p>
       <p>
-        where A is the coefficient matrix, X is the column matrix of variables, and B is the constant matrix. The
-        solution of the system depends on the properties of the coefficient matrix and the augmented matrix. Matrix
-        methods such as inverse of a matrix, row-reduction, and rank method help in determining the existence and nature
-        of solutions.
-        This V-Lab experiment focuses on solving linear systems using matrix techniques and studying their different
-        types based on consistency and homogeneity.
-        Introduction: Linear System of Equations (Matrix Method)
+        where A is the coefficient matrix, X is the column matrix of variables, and B is the constant matrix. The solution of the system depends on the properties of the coefficient matrix and the augmented matrix. 
+This virtual laboratory is designed to help students understand and apply the rank of matrices to analyze and solve systems of linear equations. Using the concept of augmented matrices, students can determine whether a given system is consistent or inconsistent, and whether it has a unique solution or infinitely many solutions, by comparing the ranks of the coefficient matrix and the augmented matrix.
+
+       
       </p>
-      <p>
-        A linear system of equations is a set of two or more linear equations involving the same variables. Such systems
-        can be efficiently represented and solved using matrix methods, which provide a systematic and compact approach
-        to analyze large systems of equations.
-        In the matrix method, a system of linear equations is written in the form
-        AX=B
-      </p>
-      <p>
-        where A is the coefficient matrix, X is the column matrix of variables, and B is the constant matrix. The
-        solution of the system depends on the properties of the coefficient matrix and the augmented matrix. Matrix
-        methods such as inverse of a matrix, row-reduction, and rank method help in determining the existence and nature
-        of solutions.
-        This V-Lab experiment focuses on solving linear systems using matrix techniques and studying their different
-        types based on consistency and homogeneity.
-      </p>
+      
 
     <p>A system of linear equations can have different types of solutions:</p>
     <ul>
@@ -230,11 +215,13 @@ input {
     </ul>
 
     <img width="500" height="700" src="Image OF Conditon .jpeg">
+
+    <h3>Note: s = rank of Matrix</h3>
 </section>
 
 <!-- EXAMPLE -->
 <section id="example">
-  <h1>Try Some Example</h1>
+  <h1>Check Out  Some Examples</h1>
     <p>Example: Solve system using rank of matrix.</p>
     <h3>Infinite Solutions Example</h3>
     <h2>
@@ -398,7 +385,7 @@ x- 3y + 2z= 1
 <input id="q3_values" placeholder="X,Y,Z">
 <button onclick="checkAnswer(3,'values')">Submit</button>
 <div id="q3_values_result" class="result"></div>
-  </div>4
+  </div>
    <!-- QUESTION 4 -->
   <div class="question">
     <h3>Question 4</h3>
@@ -630,12 +617,17 @@ function updateChart() {
   }
 }
 
+function updateScore() {
+  document.getElementById("scoreDisplay").innerText =
+    "Score: " + score;
+}
+
 
 function showSection(id) {
   document.querySelectorAll("section").forEach(s => s.style.display = "none");
   document.getElementById(id).style.display = "block";
 
-  // ✅ Force chart redraw when score section is opened
+   //✅ Force chart redraw when score section is opened
   if (id === "score") {
     setTimeout(updateChart, 50);
   }
