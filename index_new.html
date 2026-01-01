@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>System of Linear Equations App</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f4f4f9;
+}
+
+header {
+  background: #2e3e4e;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  background: #34495e;
+  padding: 10px;
+}
+
+nav button {
+  background: #3498db;
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 200px;
+}
+
+nav button:hover {
+  background: #2980b9;
+}
+
+section {
+  display: none;
+  padding: 20px;
+  margin: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.result {
+  margin-top: 8px;
+  font-weight: bold;
+}
+
+.question {
+  margin-bottom: 30px;
+}
+
+input {
+  margin: 5px 0;
+  padding: 6px;
+  width: 250px;
+}
+</style>
+
+<style>
+        .LogoConta {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ebecec;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #2c3e50, #1a2530);
+            color: rgb(255, 255, 255);
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .pcce-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-right: 25px;
+            border-right: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .pcce-logo-img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 8px;
+            background-color: white;
+            padding: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .pcce-logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pcce-logo-text .main {
+            font-size: 20px;
+            font-weight: 700;
+            color: #5a1c1c;
+            line-height: 1.2;
+        }
+
+        .pcce-logo-text .sub {
+            font-size: 12px;
+            color: #2f6876;
+            opacity: 0.9;
+            margin-top: 2px;
+        }
+</style>
+ <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+
+<body>
+
+<header>
+
+
+    <div class="LogoConta">
+        <div class="container header-container">
+            <div class="logo-section">
+                <!-- PCOE Logo -->
+                <div class="pcce-logo-container">
+                    <!-- Using GitHub raw URL with fallback -->
+                    <img src="https://raw.githubusercontent.com/dineshkute90/virtual_lab_LAUC/main/pccoe.png"
+                        alt="PCOE Logo" class="pcce-logo-img" id="pcceLogo"
+                        onerror="this.onerror=null; this.src='https://via.placeholder.com/60x60/2c3e50/ffffff?text=PCOE';">
+                    <div class="pcce-logo-text">
+                        <div class="main">APPLIED SCIENCES & HUMANITIES</div>
+                        <div class="sub">Pimpri Chinchwad College of Engineering</div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+
+    </div>
+  <h1>System of Linear Equations Learning App</h1>
+  <p>Select a section to explore</p>
+</header>
+
+<nav>
+  <button onclick="showSection('intro')">Introduction</button>
+  <button onclick="showSection('example')">Examples</button>
+  <button onclick="showSection('test')">Test Your Knowledge</button>
+  <button onclick="showSection('score')">Check Your Score</button>
+  <button onclick="showSection('feedback')">Feedback</button>
+  <button onclick="window.location.href='contributor.html'">Contributor</button>
+</nav>
+
+<!-- INTRO -->
+<section id="intro">
+  <h2>Introduction To  Linear System of Equations (Matrix Method) </h2>
+    
+      <p>
+        A linear system of equations is a set of two or more linear equations involving the same variables. Such systems
+        can be efficiently represented and solved using matrix methods, which provide a systematic and compact approach
+        to analyze large systems of equations.
+        In the matrix method, a system of linear equations is written in the form
+        <div class="top">
+        <h4>
+                AX=B      
+        </h4>
+        </div>
+
+      </p>
+      <p>
+        where A is the coefficient matrix, X is the column matrix of variables, and B is the constant matrix. The
+        solution of the system depends on the properties of the coefficient matrix and the augmented matrix. Matrix
+        methods such as inverse of a matrix, row-reduction, and rank method help in determining the existence and nature
+        of solutions.
+        This V-Lab experiment focuses on solving linear systems using matrix techniques and studying their different
+        types based on consistency and homogeneity.
+        Introduction: Linear System of Equations (Matrix Method)
+      </p>
+      <p>
+        A linear system of equations is a set of two or more linear equations involving the same variables. Such systems
+        can be efficiently represented and solved using matrix methods, which provide a systematic and compact approach
+        to analyze large systems of equations.
+        In the matrix method, a system of linear equations is written in the form
+        AX=B
+      </p>
+      <p>
+        where A is the coefficient matrix, X is the column matrix of variables, and B is the constant matrix. The
+        solution of the system depends on the properties of the coefficient matrix and the augmented matrix. Matrix
+        methods such as inverse of a matrix, row-reduction, and rank method help in determining the existence and nature
+        of solutions.
+        This V-Lab experiment focuses on solving linear systems using matrix techniques and studying their different
+        types based on consistency and homogeneity.
+      </p>
+
+    <p>A system of linear equations can have different types of solutions:</p>
+    <ul>
+      <li><b>Consistent:</b> At least one solution exists.</li>
+      <li><b>Inconsistent:</b> No solution exists.</li>
+      <li><b>Unique Solution:</b> Exactly one solution (when det(A) ≠ 0).</li>
+      <li><b>Infinite Solutions:</b> Many solutions (when rank(A) = rank([A|B]) &lt; number of variables).</li>
+    </ul>
+
+    <img width="500" height="700" src="Image OF Conditon .jpeg">
+</section>
+
+<!-- EXAMPLE -->
+<section id="example">
+  <h1>Try Some Example</h1>
+    <p>Example: Solve system using rank of matrix.</p>
+    <h3>Infinite Solutions Example</h3>
+    <h2>
+      <pre>
+Equation 1: x + y = 2
+Equation 2: 2x + 2y = 4
+    </pre>
+ A= \[
+  \left[
+   \begin{array}{cc}
+   1 & 1   \\
+    2 & 2   \\ 
+   \end{array}
+   \right]
+   \]
+   B=
+   \[
+  \left[
+   \begin{array}{c}
+   2  \\
+    4  \\ 
+   \end{array}
+   \right]
+   \]
+    </h2>
+    Rank(A) = 1, Rank([A|B]) = 1, Variables = 2 → Infinite solutions
+        
+
+    <h3>Unique Solution Example</h3>
+    <h2>
+      <pre>
+Equation 1: x + 2y +z = -1
+Equation 2: 6x + y + z = -4
+Equation 3: 2x - 3y - z = 0
+    </pre>
+ A= \[
+  \left[
+   \begin{array}{ccc}
+   1 & 2 & 1   \\
+    6 & 1 & 1  \\ 
+    2 & -3 & -1   \\
+   \end{array}
+   \right]
+   \]
+   B=
+   \[
+  \left[
+   \begin{array}{c}
+   -1 \\
+    -4  \\
+    0 \\ 
+   \end{array}
+   \right]
+   \]
+    </h2>
+    Rank(A) = 3, Rank([A|B]) = 3, Variables = 3 → Unique solutions
+
+    <h3>No Solution Example</h3>
+    <h2>
+      <pre>
+Equation 1: 2x - y + 3z = 2
+Equation 2: x + y + 2z = 2
+Equation 3: 5x - y - 8z = 8
+    </pre>
+ A= \[
+  \left[
+   \begin{array}{ccc}
+   2 & -1 & 3   \\
+    1 & 1 & 2  \\ 
+    5 & -1 & -8   \\
+   \end{array}
+   \right]
+   \]
+   B=
+   \[
+  \left[
+   \begin{array}{c}
+   2 \\
+    2  \\
+    8 \\ 
+   \end{array}
+   \right]
+   \]
+    </h2>
+    Rank(A) = 2, Rank([A|B]) = 3, Variables = 3 → No solutions
+
+   
+   
+
+    
+</section>
+
+<!-- TEST -->
+<section id="test">
+  <h2>Test Your Knowledge</h2>
+
+  <!-- QUESTION 1 -->
+  <div class="question">
+    <h3>Question 1</h3>
+<pre>
+3x + y + z= 2
+x- 3y + 2z= 1
+7x- y + 4z= 5
+
+</pre>
+
+<input id="q1_rankA" placeholder="Rank of A">
+<button onclick="checkAnswer(1,'rankA')">Submit</button>
+<div id="q1_rankA_result" class="result"></div>
+
+<input id="q1_rankAB" placeholder="Rank of A|B">
+<button onclick="checkAnswer(1,'rankAB')">Submit</button>
+<div id="q1_rankAB_result" class="result"></div>
+
+<input id="q1_values" placeholder="X,Y,Z">
+<button onclick="checkAnswer(1,'values')">Submit</button>
+<div id="q1_values_result" class="result"></div>
+  </div>
+
+  <!-- QUESTION 2 -->
+  <div class="question">
+    <h3>Question 2</h3>
+<pre>
+    2x + +2y + z = 5
+    x - y + z = 1 
+    3x + y + 2z = 4
+
+</pre>
+
+<input id="q2_rankA" placeholder="Rank of A">
+<button onclick="checkAnswer(2,'rankA')">Submit</button>
+<div id="q2_rankA_result" class="result"></div>
+
+<input id="q2_rankAB" placeholder="Rank of A|B">
+<button onclick="checkAnswer(2,'rankAB')">Submit</button>
+<div id="q2_rankAB_result" class="result"></div>
+
+<input id="q2_values" placeholder="X,Y,Z">
+<button onclick="checkAnswer(2,'values')">Submit</button>
+<div id="q2_values_result" class="result"></div>
+  </div>
+
+   <!-- QUESTION 3 -->
+  <div class="question">
+    <h3>Question 3</h3>
+<pre>
+    3x + 2y + 7z = 0
+    4x - 3y - 2z = 0
+    5x + 9y + 23z = 0
+
+</pre>
+
+<input id="q3_rankA" placeholder="Rank of A">
+<button onclick="checkAnswer(3,'rankA')">Submit</button>
+<div id="q3_rankA_result" class="result"></div>
+
+<input id="q3_rankAB" placeholder="Rank of A|B">
+<button onclick="checkAnswer(3,'rankAB')">Submit</button>
+<div id="q3_rankAB_result" class="result"></div>
+
+<input id="q3_values" placeholder="X,Y,Z">
+<button onclick="checkAnswer(3,'values')">Submit</button>
+<div id="q3_values_result" class="result"></div>
+  </div>4
+   <!-- QUESTION 4 -->
+  <div class="question">
+    <h3>Question 4</h3>
+<pre>
+   x - y + 2z = 2
+   2x + y +4z = 7
+   4x - y + z = 4
+</pre>
+
+<input id="q4_rankA" placeholder="Rank of A">
+<button onclick="checkAnswer(1,'rankA')">Submit</button>
+<div id="q4_rankA_result" class="result"></div>
+
+<input id="q4_rankAB" placeholder="Rank of A|B">
+<button onclick="checkAnswer(1,'rankAB')">Submit</button>
+<div id="q4_rankAB_result" class="result"></div>
+
+<input id="q4_values" placeholder="X,Y,Z">
+<button onclick="checkAnswer(1,'values')">Submit</button>
+<div id="q4_values_result" class="result"></div>
+  </div>
+
+   <!-- QUESTION 5-->
+  <div class="question">
+    <h3>Question 5</h3>
+<pre>
+   2x - y + z = 2
+   6x - 3y + 3z = 6
+   4x - 2y + 2z = 4
+</pre>
+
+<input id="q5_rankA" placeholder="Rank of A">
+<button onclick="checkAnswer(1,'rankA')">Submit</button>
+<div id="q5_rankA_result" class="result"></div>
+
+<input id="q5_rankAB" placeholder="Rank of A|B">
+<button onclick="checkAnswer(1,'rankAB')">Submit</button>
+<div id="q5_rankAB_result" class="result"></div>
+
+<input id="q5_values" placeholder="X,Y,Z">
+<button onclick="checkAnswer(1,'values')">Submit</button>
+<div id="q5_values_result" class="result"></div>
+  </div>
+
+   <!-- QUESTION 6 -->
+  <div class="question">
+    <h3>Question 6</h3>
+<pre>
+    2x + 3y - z = 0
+    x - y - 2z = 0
+    3x + y + 3z = 0
+
+</pre>
+
+<input id="q6_rankA" placeholder="Rank of A">
+<button onclick="checkAnswer(1,'rankA')">Submit</button>
+<div id="q6_rankA_result" class="result"></div>
+
+<input id="q6_rankAB" placeholder="Rank of A|B">
+<button onclick="checkAnswer(1,'rankAB')">Submit</button>
+<div id="q6_rankAB_result" class="result"></div>
+
+<input id="q6_values" placeholder="X,Y,Z">
+<button onclick="checkAnswer(1,'values')">Submit</button>
+<div id="q6_values_result" class="result"></div>
+  </div>
+
+   <!-- QUESTION 7 -->
+  <div class="question">
+    <h3>Question 7</h3>
+<pre>
+    3x + y + z = 2
+    x - 3y + 2z = 1
+    7x - y + 4z = 5
+
+</pre>
+
+<input id="q7_rankA" placeholder="Rank of A">
+<button onclick="checkAnswer(1,'rankA')">Submit</button>
+<div id="q7_rankA_result" class="result"></div>
+
+<input id="q7_rankAB" placeholder="Rank of A|B">
+<button onclick="checkAnswer(1,'rankAB')">Submit</button>
+<div id="q7_rankAB_result" class="result"></div>
+
+<input id="q7_values" placeholder="X,Y,Z">
+<button onclick="checkAnswer(1,'values')">Submit</button>
+<div id="q7_values_result" class="result"></div>
+  </div>
+
+   <!-- QUESTION 8 -->
+  <div class="question">
+    <h3>Question 8</h3>
+<pre>
+   2x + 6y = -11
+   6x + 20y -6z = -3
+   6y -18z = -1
+</pre>
+
+<input id="q8_rankA" placeholder="Rank of A">
+<button onclick="checkAnswer(1,'rankA')">Submit</button>
+<div id="q8_rankA_result" class="result"></div>
+
+<input id="q8_rankAB" placeholder="Rank of A|B">
+<button onclick="checkAnswer(1,'rankAB')">Submit</button>
+<div id="q8_rankAB_result" class="result"></div>
+
+<input id="q8_values" placeholder="X,Y,Z">
+<button onclick="checkAnswer(1,'values')">Submit</button>
+<div id="q8_values_result" class="result"></div>
+  </div>
+
+  
+</section>
+
+<!-- SCORE -->
+<section id="score">
+  <h2>Check Your Score</h2>
+
+  <p id="scoreDisplay"><b>Score: 0</b></p>
+  <p><i>Only the first correct submission is counted.</i></p>
+
+  <canvas id="scoreChart" width="300" height="300"></canvas>
+</section>
+
+
+<!-- FEEDBACK -->
+<section id="feedback">
+  <h2>Feedback</h2>
+  <textarea id="feedbackText" rows="4" cols="50"></textarea><br><br>
+  <button onclick="submitFeedback()">Submit</button>
+  <div id="feedbackResult" class="result"></div>
+</section>
+
+<section id="Contributor">
+    <a href="contributor.html">Contributors</a>
+  </section>
+
+<!-- JAVASCRIPT -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    let totalAttempts = 0;
+    let correctAttempts = 0;
+    let scoreChart;
+    let score = 0;
+    let attempted = new Set();
+
+const answers = {
+  1: { rankA: "2", rankAB: "2", values: "0.5,0.4,1" },
+  2: { rankA: "2", rankAB: "3", values: "No Solution" },
+  3: {rankA:"2", rankAB:"2", values: "-1,-2,1"},
+  4: {rankA: "3", rankAB:"3", value: "1,1,1"},
+  5: {rankA: "1", rankAB:"1", value: "(2-C)/2,C,1"},
+  6: {rankA: "3", rankAB:"3", value: "0,0,0"},
+  7: {rankA: "", rankAB:"", value: ""},
+  8: {rankA: "3", rankAB:"3", value: "No Sol"}
+};
+
+function checkAnswer(qNo, type) {
+
+  const input = document.getElementById(`q${qNo}_${type}`);
+  const result = document.getElementById(`q${qNo}_${type}_result`);
+  const userAns = input.value.trim();
+  const correctAns = answers[qNo][type];
+
+  if (!userAns) {
+    result.innerText = "⚠ Enter an answer";
+    return;
+  }
+
+  const key = qNo + "_" + type;
+
+  // Count total attempts only once per field
+  if (!attempted.has(key)) {
+    totalAttempts++;
+  }
+
+  if (userAns === correctAns) {
+    result.innerText = "✅ Correct";
+
+    if (!attempted.has(key)) {
+      attempted.add(key);
+      score++;
+      correctAttempts++;
+      updateScore();
+      updateChart();
+    }
+  } else {
+    result.innerText = "❌ Correct answer: " + correctAns;
+
+    if (!attempted.has(key)) {
+      attempted.add(key);
+      updateChart();
+    }
+  }
+}
+
+function updateChart() {
+  const wrongAttempts = totalAttempts - correctAttempts;
+
+  if (!scoreChart) {
+    const ctx = document.getElementById("scoreChart").getContext("2d");
+
+    scoreChart = new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: ["Correct", "Wrong"],
+        datasets: [{
+          data: [correctAttempts, wrongAttempts],
+          backgroundColor: ["#2ecc71", "#e74c3c"]
+        }]
+      },
+      options: {
+        responsive: false,
+        plugins: {
+          legend: {
+            position: "bottom"
+          }
+        }
+      }
+    });
+  } else {
+    scoreChart.data.datasets[0].data = [
+      correctAttempts,
+      wrongAttempts
+    ];
+    scoreChart.update();
+  }
+}
+
+
+function showSection(id) {
+  document.querySelectorAll("section").forEach(s => s.style.display = "none");
+  document.getElementById(id).style.display = "block";
+
+  // ✅ Force chart redraw when score section is opened
+  if (id === "score") {
+    setTimeout(updateChart, 50);
+  }
+}
+
+
+function submitFeedback() {
+  const fb = document.getElementById("feedbackText").value.trim();
+  document.getElementById("feedbackResult").innerText =
+    fb ? "Thanks for your feedback!" : "Please write feedback.";
+}
+
+function showSection(id) {
+  document.querySelectorAll("section").forEach(s => s.style.display="none");
+  document.getElementById(id).style.display="block";
+}
+
+showSection("intro");
+</script>
+
+</body>
+</html>
