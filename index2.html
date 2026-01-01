@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>System of Linear Equations App</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f9; }
+    header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
+    nav { display: flex; justify-content: center; gap: 15px; background: #34495e; padding: 10px; }
+    nav button { background: #3498db; border: none; color: white; padding: 10px 15px; border-radius: 5px; cursor: pointer; }
+    nav button:hover { background: #2980b9; }
+    section { display: none; padding: 20px; margin: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    h2 { color: #2c3e50; }
+    .matrix-input { display: grid; grid-template-columns: repeat(3, 60px); gap: 5px; margin-bottom: 10px; }
+    .vector-input { display: grid; grid-template-columns: 60px; gap: 5px; margin-bottom: 10px; }
+    input { width: 60px; padding: 5px; text-align: center; }
+    .result { margin-top: 10px; font-weight: bold; white-space: pre-line; }
+    textarea { width: 100%; height: 80px; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>System of Linear Equations Learning App</h1>
+    <p>Select a section to explore</p>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <button onclick="showSection('intro')">Introduction</button>
+    <button onclick="showSection('example')">Try Some Example</button>
+    <button onclick="showSection('test')">Test Your Knowledge</button>
+    <button onclick="showSection('feedback')">Feedback</button>
+  </nav>
+
+  <!-- Sections -->
+  <section id="intro">
+    <h2>Introduction</h2>
+    <p>A system of linear equations can have different types of solutions:</p>
+    <ul>
+      <li><b>Consistent:</b> At least one solution exists.</li>
+      <li><b>Inconsistent:</b> No solution exists.</li>
+      <li><b>Unique Solution:</b> Exactly one solution (when rank(A) = rank([A|B]) = number of variables).</li>
+      <li><b>Infinite Solutions:</b> Many solutions (when rank(A) = rank([A|B]) &lt; number of variables).</li>
+    </ul>
+  </section>
+
+  <section id="example">
+    <h2>Try Some Example (3×3 System)</h2>
+    <p>Enter coefficients for matrix A (3×3):</p>
+    <div class="matrix-input" id="matrixA"></div>
+    <p>Enter constants for matrix B (3×1):</p>
+    <div class="vector-input" id="matrixB"></div>
+    <p>Enter number of variables:</p>
+    <input type="number" id="numVars" min="1" max="3" value="3">
+    <br><br>
+    <button onclick="solveSystem()">Check Solution Type</button>
+    <div id="exampleResult" class="result"></div>
+  </section>
+
+  <section id="test">
+    <h2>Test Your Knowledge</h2>
+    <p>Question: Solve the system</p>
+    <pre>
+x + y = 3
+2x + 3y = 7
+    </pre>
+    <input type="text" id="userAnswer" placeholder="Enter solution (x,y)">
+    <button onclick="checkAnswer()">Submit Answer</button>
+    <div id="answerResult" class="result"></div>
+  </section>
+
+  <section id="feedback">
+    <h2>Feedback</h2>
+    <p>Tell us what you think about this MATLAB-inspired app:</p>
+    <textarea id="feedbackText"></textarea>
+    <button onclick="submitFeedback()">Submit Feedback</button>
+    <div id="feedbackResult" class="result"></div>
+  </section>
+
+  <script>
+    // Show sections
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+
+    // Create input fields for A and B
+    function createInputs() {
+      const A = document.getElementById("matrixA");
+      const B = document.getElementById("matrixB");
+      for(let i=0;i<9;i++) {
+        let inp = document.createElement("input");
+        inp.type="number"; inp.id="a"+i;
+        A.appendChild(inp);
+      }
+      for(let i=0;i<3;i++) {
+        let inp = document.createElement("input");
+        inp.type="number"; inp.id="b"+i;
+        B.appendChild(inp);
+      }
+    }
+
+    // Function to compute rank using Gaussian elimination
+    function rankMatrix(M) {
+      let A = M.map(row => row.slice());
+      let m = A.length, n = A[0].length;
+      let rank = 0;
+      for(let col=0,row=0; col<n && row<m; col++) {
+        // find pivot
+        let pivot = row;
+        for(let i=row+1;i<m;i++) if(Math.abs(A[i][col]) > Math.abs(A[pivot][col])) pivot=i;
+        if(Math.abs(A[pivot][col]) < 1e-10) continue;
+        // swap
+        [A[row],A[pivot]]=[A[pivot],A[row]];
+        // normalize
+        let div=A[row][col];
+        for(let j=col;j<n;j++) A[row][j]/=div;
+        // eliminate
+        for(let i=0;i<m;i++) if(i!==row){
+          let factor=A[i][col];
+          for(let j=col;j<n;j++) A[i][j]-=factor*A[row][j];
+        }
+        row++; rank++;
+      }
+      return rank;
+    }
+
+    // Solve system type
+    function solveSystem() {
+      let A = [[+a0.value,+a1.value,+a2.value],
+               [+a3.value,+a4.value,+a5.value],
+               [+a6.value,+a7.value,+a8.value]];
+      let B = [[+b0.value],[+b1.value],[+b2.value]];
+      let numVars = +document.getElementById("numVars").value;
+
+      // Augmented matrix [A|B]
+      let Aug = A.map((row,i)=>row.concat(B[i]));
+
+      let rankA = rankMatrix(A);
+      let rankAug = rankMatrix(Aug);
+
+      let resultText = "Rank(A) = " + rankA + "\nRank([A|B]) = " + rankAug + "\nVariables = " + numVars + "\n";
+
+      if(rankA === rankAug) {
+        if(rankA === numVars) {
+          resultText += "✅ Unique solution";
+        } else if(rankA < numVars) {
+          resultText += "♾ Infinite solutions";
+        } else {
+          resultText += "⚠ Unexpected case";
+        }
+      } else {
+        resultText += "❌ No solution (Inconsistent system)";
+      }
+
+      document.getElementById("exampleResult").innerText = resultText;
+    }
+
+    function checkAnswer() {
+      let ans = document.getElementById("userAnswer").value.trim();
+      if(ans === "2,1" || ans === "(2,1)") {
+        document.getElementById("answerResult").innerText = "✅ Correct! Solution is x=2, y=1";
+      } else {
+        document.getElementById("answerResult").innerText =
+          "❌ Wrong. Correct steps:\n1) From x+y=3 → y=3-x\n2) Substitute in 2x+3y=7 → 2x+3(3-x)=7 → -x+9=7 → x=2, y=1";
+      }
+    }
+
+    function submitFeedback() {
+      let fb = document.getElementById("feedbackText").value.trim();
+      if(fb) {
+        document.getElementById("
